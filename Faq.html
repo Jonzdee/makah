@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ — Makah Serenity Foods</title>
+    <meta name="description" content="Common questions about orders, shipping, and our Nigerian staples." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        green: { deep: '#1B5E20', mid: '#256B29', soft: '#DCEAD9' },
+                        gold: { DEFAULT: '#C89B3C', light: '#E4C778', deep: '#9C7A2C' },
+                        orange: { DEFAULT: '#E67E22', deep: '#C4661A' },
+                        cream: '#FBF3E3',
+                        husk: '#F3E6C8',
+                        ink: '#152016',
+                    },
+                    fontFamily: {
+                        display: ['Poppins', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        details>summary {
+            list-style: none;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details[open] .faq-chevron {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body class="bg-cream text-ink">
+
+    <header id="site-header" class="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b border-black/5"></header>
+
+    <!-- ============ FAQ HERO ============ -->
+    <section class="bg-green-deep grain-texture py-12">
+        <div class="max-w-5xl mx-auto px-5 sm:px-8">
+            <span class="text-gold-light font-display font-semibold text-xs uppercase tracking-widest">Need to
+                know</span>
+            <h1 class="font-display font-900 text-white text-3xl sm:text-4xl mt-2">Frequently asked questions</h1>
+            <p class="text-white/75 mt-2 max-w-md">Can't find your answer here? Reach us on the <a href="Contact.html"
+                    class="underline hover:text-gold-light">contact page</a>.</p>
+        </div>
+    </section>
+
+    <!-- ============ FAQ LIST ============ -->
+    <section class="max-w-3xl mx-auto px-5 sm:px-8 py-16">
+        <div class="space-y-4">
+
+            <details class="bg-white rounded-2xl border border-black/5 px-6 py-5 group" open>
+                <summary
+                    class="flex items-center justify-between cursor-pointer font-display font-700 text-ink focus-ring rounded">
+                    How fresh is the garri when it arrives?
+                    <svg class="faq-chevron transition-transform shrink-0" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="#1B5E20" stroke-width="2">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </summary>
+                <p class="text-ink/65 text-sm leading-relaxed mt-3">Garri is sealed within 24 hours of processing and
+                    dispatched the same day your order is confirmed. Most domestic orders arrive within 2–4 business
+                    days; international orders vary by destination.</p>
+            </details>
+
+            <details class="bg-white rounded-2xl border border-black/5 px-6 py-5 group">
+                <summary
+                    class="flex items-center justify-between cursor-pointer font-display font-700 text-ink focus-ring rounded">
+                    How does the "true measure" guarantee work?
+                    <svg class="faq-chevron transition-transform shrink-0" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="#1B5E20" stroke-width="2">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </summary>
+                <p class="text-ink/65 text-sm leading-relaxed mt-3">Every scoop is calibrated against the same
+                    standard weight before packing. If a bag ever comes in under the listed weight, we'll replace it
+                    or refund that item, no questions asked.</p>
+            </details>
+
+            <details class="bg-white rounded-2xl border border-black/5 px-6 py-5 group">
+                <summary
+                    class="flex items-center justify-between cursor-pointer font-display font-700 text-ink focus-ring rounded">
+                    Do you ship internationally?
+                    <svg class="faq-chevron transition-transform shrink-0" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="#1B5E20" stroke-width="2">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </summary>
+                <p class="text-ink/65 text-sm leading-relaxed mt-3">Yes — we regularly ship to the UK, US, and Canada.
+                    International shipping cost and timing are calculated at checkout based on destination and order
+                    weight.</p>
+            </details>
+
+            <details class="bg-white rounded-2xl border border-black/5 px-6 py-5 group">
+                <summary
+                    class="flex items-center justify-between cursor-pointer font-display font-700 text-ink focus-ring rounded">
+                    How does the bulk discount work?
+                    <svg class="faq-chevron transition-transform shrink-0" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="#1B5E20" stroke-width="2">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </summary>
+                <p class="text-ink/65 text-sm leading-relaxed mt-3">Add three or more staples to your cart and 10% is
+                    taken off your subtotal automatically — no code needed. Restaurants and diaspora stores can also
+                    ask about wholesale pricing via the contact page.</p>
+            </details>
+
+            <details class="bg-white rounded-2xl border border-black/5 px-6 py-5 group">
+                <summary
+                    class="flex items-center justify-between cursor-pointer font-display font-700 text-ink focus-ring rounded">
+                    What if my order arrives damaged?
+                    <svg class="faq-chevron transition-transform shrink-0" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="#1B5E20" stroke-width="2">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </summary>
+                <p class="text-ink/65 text-sm leading-relaxed mt-3">Send us a photo of the damaged item within 48
+                    hours of delivery through the contact page and we'll arrange a replacement or refund right away.</p>
+            </details>
+
+            <details class="bg-white rounded-2xl border border-black/5 px-6 py-5 group">
+                <summary
+                    class="flex items-center justify-between cursor-pointer font-display font-700 text-ink focus-ring rounded">
+                    Can I change or cancel an order after placing it?
+                    <svg class="faq-chevron transition-transform shrink-0" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="#1B5E20" stroke-width="2">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </summary>
+                <p class="text-ink/65 text-sm leading-relaxed mt-3">Orders can be changed or cancelled within 2 hours
+                    of placing them, before they're packed for dispatch. Message us as soon as possible via the
+                    contact page.</p>
+            </details>
+
+        </div>
+    </section>
+
+    <footer id="site-footer" class="bg-ink text-white/70 pt-16 pb-8 grain-texture"></footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

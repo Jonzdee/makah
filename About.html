@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us — Makah Serenity Foods</title>
+    <meta name="description" content="How Makah Serenity Foods sources, measures, and ships Nigerian staples." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        green: { deep: '#1B5E20', mid: '#256B29', soft: '#DCEAD9' },
+                        gold: { DEFAULT: '#C89B3C', light: '#E4C778', deep: '#9C7A2C' },
+                        orange: { DEFAULT: '#E67E22', deep: '#C4661A' },
+                        cream: '#FBF3E3',
+                        husk: '#F3E6C8',
+                        ink: '#152016',
+                    },
+                    fontFamily: {
+                        display: ['Poppins', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Scoped additions for the upgraded About page — safe to keep alongside styles.css */
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-rail {
+            position: relative;
+        }
+
+        .timeline-rail::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 6px;
+            bottom: 6px;
+            width: 2px;
+            background: linear-gradient(to bottom, #C89B3C, #1B5E20 85%);
+        }
+
+        @media (min-width: 768px) {
+            .timeline-rail::before {
+                left: 50%;
+                transform: translateX(-1px);
+            }
+        }
+
+        .timeline-dot {
+            box-shadow: 0 0 0 5px #FBF3E3;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        .stat-card {
+            background: radial-gradient(circle at 30% 20%, rgba(200, 155, 60, 0.10), transparent 60%);
+        }
+    </style>
+</head>
+
+<body class="bg-cream text-ink">
+
+    <!-- ============ NAV ============ -->
+    <header id="site-nav"
+        class="sticky top-0 z-50 bg-cream/80 backdrop-blur-md border-b border-black/5 transition-shadow duration-300">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between h-18 py-3">
+
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-2 focus-ring rounded shrink-0">
+                <svg width="34" height="34" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="20" fill="#1B5E20" />
+                    <path d="M12 24C12 24 14 14 20 14C26 14 28 24 28 24" stroke="#C89B3C" stroke-width="2.5"
+                        stroke-linecap="round" />
+                    <path d="M20 14V10" stroke="#E67E22" stroke-width="2.5" stroke-linecap="round" />
+                </svg>
+                <span class="font-display font-800 text-lg sm:text-xl tracking-tight text-green-deep">
+                    Makah <span class="text-orange">Serenity</span>
+                </span>
+            </a>
+
+            <!-- Desktop nav -->
+            <nav
+                class="hidden lg:flex items-center gap-1 font-display font-medium text-[15px] text-ink/75 bg-white/50 rounded-full px-1.5 py-1.5 border border-black/5">
+                        <a href="index.html" class="nav-pill">Home</a>
+                <a href="Shop.html" class="nav-pill">Shop</a>
+                <a href="About.html" class="nav-pill">About</a>
+                <a href="Contact.html" class="nav-pill">Contact</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-3">
+                <a href="Cart.html" aria-label="Open cart"
+                    class="relative p-2.5 rounded-full hover:bg-green-soft transition-colors focus-ring">
+                    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1B5E20" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1" />
+                        <circle cx="20" cy="21" r="1" />
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                    </svg>
+                    <span id="cart-badge"
+                        class="absolute -top-1 -right-1 bg-orange text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                </a>
+
+                <a href="Shop.html"
+                    class="hidden sm:inline-flex bg-orange hover:bg-orange-deep text-white font-display font-semibold text-sm px-5 py-2.5 rounded-full transition-colors focus-ring shadow-sm shadow-orange/30">
+                    Shop Now
+                </a>
+
+                <button id="menu-btn" aria-label="Open menu" aria-expanded="false"
+                    class="lg:hidden relative w-10 h-10 rounded-full hover:bg-green-soft focus-ring flex items-center justify-center">
+                    <span class="hamburger-line" style="top:14px"></span>
+                    <span class="hamburger-line" style="top:19px"></span>
+                    <span class="hamburger-line" style="top:24px"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu"
+            class="hidden lg:hidden border-t border-black/5 bg-cream px-5 py-4 flex flex-col gap-1 font-display font-medium text-ink/80">
+            
+            <a href="index.html" class="mobile-link">Home</a>
+            <a href="Shop.html" class="mobile-link">Shop</a>
+            <a href="About.html" class="mobile-link">About</a>
+            <a href="Contact.html" class="mobile-link">Contact</a>
+            <a href="Cart.html" class="mobile-link">Cart</a>
+        </div>
+    </header>
+
+    <!-- ============ ABOUT HERO ============ -->
+    <section class="relative overflow-hidden bg-green-deep grain-texture">
+        <div
+            class="max-w-7xl mx-auto px-5 sm:px-8 pt-14 pb-16 lg:pt-20 lg:pb-20 grid lg:grid-cols-2 gap-12 items-center">
+            <div class="relative z-10">
+                <span
+                    class="inline-flex items-center gap-2 bg-white/10 text-gold-light font-display font-semibold text-xs tracking-wide uppercase px-4 py-2 rounded-full">
+                    Our story
+                </span>
+                <h1 class="font-display font-900 text-white text-4xl sm:text-5xl leading-[1.05] mt-6">
+                    Started with one scoop, <span class="text-gold-light">one true measure.</span>
+                </h1>
+                <p class="text-white/80 text-lg mt-6 max-w-md leading-relaxed">
+                    Makah Serenity Foods began in Ijebu Ode, packing garri for family abroad who missed the taste of
+                    home. What started as care packages grew into a standard: every scoop, every bag, weighed the
+                    same way, every time.
+                </p>
+
+                <!-- New: quick stat strip -->
+                <div class="grid grid-cols-3 gap-4 mt-10 max-w-md">
+                    <div>
+                        <p class="font-display font-800 text-2xl sm:text-3xl text-gold-light">2018</p>
+                        <p class="text-white/60 text-xs mt-1 uppercase tracking-wide">First shipment</p>
+                    </div>
+                    <div>
+                        <p class="font-display font-800 text-2xl sm:text-3xl text-gold-light">3</p>
+                        <p class="text-white/60 text-xs mt-1 uppercase tracking-wide">States we source from</p>
+                    </div>
+                    <div>
+                        <p class="font-display font-800 text-2xl sm:text-3xl text-gold-light">12</p>
+                        <p class="text-white/60 text-xs mt-1 uppercase tracking-wide">Countries we ship to</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative flex justify-center lg:justify-end">
+                <div
+                    class="frond-frame bg-gradient-to-br from-gold-light via-gold to-orange w-full max-w-sm aspect-square flex items-center justify-center p-10">
+                    <svg width="180" height="180" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="110" cy="180" rx="70" ry="14" fill="rgba(21,32,22,0.15)" />
+                        <path d="M40 90 Q40 60 110 60 Q180 60 180 90 L165 165 Q160 180 140 180 L80 180 Q60 180 55 165 Z"
+                            fill="#F3E6C8" stroke="#1B5E20" stroke-width="4" />
+                        <ellipse cx="110" cy="90" rx="70" ry="18" fill="#FBF3E3" stroke="#1B5E20" stroke-width="4" />
+                        <ellipse cx="110" cy="88" rx="55" ry="12" fill="#EADCB5" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <svg class="divider-frond" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0 Q120 50 240 20 T480 25 T720 10 T960 30 T1200 15 T1440 30 V60 H0 Z" fill="#FBF3E3" />
+        </svg>
+    </section>
+
+    <!-- ============ MISSION ============ -->
+    <section class="max-w-4xl mx-auto px-5 sm:px-8 py-20 text-center reveal">
+        <span class="text-orange font-display font-semibold text-xs uppercase tracking-widest">Our mission</span>
+        <h2 class="font-display font-800 text-3xl sm:text-4xl text-green-deep mt-3">
+            Nigerian staples that taste like they came straight from the farm, no matter how far you've moved.
+        </h2>
+        <p class="text-ink/65 mt-6 leading-relaxed max-w-2xl mx-auto">
+            We work directly with growers and millers across Ogun, Oyo, and Benue states, cutting out the middle
+            markets that erode both quality and fair pricing. Every batch is checked by hand before it's sealed —
+            no shortcuts, no filler, no guesswork on weight.
+        </p>
+    </section>
+
+    <!-- ============ JOURNEY TIMELINE ============ -->
+    <section class="bg-husk py-20">
+        <div class="max-w-4xl mx-auto px-5 sm:px-8">
+            <div class="max-w-2xl mx-auto text-center mb-16 reveal">
+                <span class="text-orange font-display font-semibold text-xs uppercase tracking-widest">How we
+                    got here</span>
+                <h2 class="font-display font-800 text-3xl sm:text-4xl text-green-deep mt-3">From care packages to a
+                    standard people trust</h2>
+            </div>
+
+            <div class="timeline-rail flex flex-col gap-12">
+                <!-- 2018 -->
+                <div class="reveal md:grid md:grid-cols-2 md:gap-10 items-center">
+                    <div class="md:text-right md:pr-10">
+                        <span class="font-display font-800 text-gold-deep text-sm">2018</span>
+                        <h3 class="font-display font-700 text-lg text-ink mt-1">Packing garri for family abroad</h3>
+                        <p class="text-ink/65 text-sm mt-2 leading-relaxed">A weekend habit of weighing and sealing
+                            garri for relatives in London and Houston, so it arrived exactly as promised.</p>
+                    </div>
+                    <div class="hidden md:block"></div>
+                </div>
+                <!-- 2020 -->
+                <div class="reveal md:grid md:grid-cols-2 md:gap-10 items-center">
+                    <div class="hidden md:block"></div>
+                    <div class="md:pl-10">
+                        <span class="font-display font-800 text-gold-deep text-sm">2020</span>
+                        <h3 class="font-display font-700 text-lg text-ink mt-1">First commercial batch, first scale</h3>
+                        <p class="text-ink/65 text-sm mt-2 leading-relaxed">Word spread beyond family. We built our
+                            first calibrated scoop standard so every customer got the same fill, every time.</p>
+                    </div>
+                </div>
+                <!-- 2023 -->
+                <div class="reveal md:grid md:grid-cols-2 md:gap-10 items-center">
+                    <div class="md:text-right md:pr-10">
+                        <span class="font-display font-800 text-gold-deep text-sm">2023</span>
+                        <h3 class="font-display font-700 text-lg text-ink mt-1">Direct partnerships with growers</h3>
+                        <p class="text-ink/65 text-sm mt-2 leading-relaxed">We cut out the middle markets and started
+                            buying straight from millers in Ogun, Oyo, and Benue — better pay for them, better price
+                            for you.</p>
+                    </div>
+                    <div class="hidden md:block"></div>
+                </div>
+                <!-- 2026 -->
+                <div class="reveal md:grid md:grid-cols-2 md:gap-10 items-center">
+                    <div class="hidden md:block"></div>
+                    <div class="md:pl-10">
+                        <span class="font-display font-800 text-gold-deep text-sm">2026</span>
+                        <h3 class="font-display font-700 text-lg text-ink mt-1">Shipping to 12 countries, still by
+                            hand</h3>
+                        <p class="text-ink/65 text-sm mt-2 leading-relaxed">Same-day dispatch, same hand-checked
+                            batches, now reaching Nigerian kitchens across three continents.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ VALUES ============ -->
+    <section class="bg-white py-20">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8">
+            <div class="max-w-2xl mx-auto text-center mb-14 reveal">
+                <span class="text-orange font-display font-semibold text-xs uppercase tracking-widest">What guides
+                    us</span>
+                <h2 class="font-display font-800 text-3xl sm:text-4xl text-green-deep mt-3">Three things we won't
+                    compromise on</h2>
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-6 reveal">
+                <div class="card-lift bg-cream rounded-2xl p-7 border border-black/5">
+                    <div class="w-12 h-12 rounded-xl bg-green-soft flex items-center justify-center mb-5">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1B5E20" stroke-width="2"
+                            stroke-linecap="round">
+                            <path d="M6 3h12l-1 9a5 5 0 0 1-10 0Z" />
+                            <path d="M12 12v9" />
+                            <path d="M8 21h8" />
+                        </svg>
+                    </div>
+                    <h3 class="font-display font-700 text-lg text-ink mb-2">True weight, always</h3>
+                    <p class="text-ink/65 text-sm leading-relaxed">Every scoop is calibrated to the same standard.
+                        What's on the label is what's in the bag.</p>
+                </div>
+                <div class="card-lift bg-cream rounded-2xl p-7 border border-black/5">
+                    <div class="w-12 h-12 rounded-xl bg-green-soft flex items-center justify-center mb-5">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1B5E20" stroke-width="2"
+                            stroke-linecap="round">
+                            <path d="M3 12h18M3 6h18M3 18h18" />
+                            <circle cx="19" cy="6" r="1.5" fill="#1B5E20" />
+                            <circle cx="5" cy="18" r="1.5" fill="#1B5E20" />
+                        </svg>
+                    </div>
+                    <h3 class="font-display font-700 text-lg text-ink mb-2">Fair to the farmer</h3>
+                    <p class="text-ink/65 text-sm leading-relaxed">Buying direct means growers see more of every
+                        naira, and we can trace every batch back to source.</p>
+                </div>
+                <div class="card-lift bg-cream rounded-2xl p-7 border border-black/5">
+                    <div class="w-12 h-12 rounded-xl bg-green-soft flex items-center justify-center mb-5">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1B5E20" stroke-width="2"
+                            stroke-linecap="round">
+                            <rect x="3" y="7" width="18" height="14" rx="2" />
+                            <path d="M3 11h18" />
+                            <path d="M8 7V4h8v3" />
+                        </svg>
+                    </div>
+                    <h3 class="font-display font-700 text-lg text-ink mb-2">Fresh on arrival</h3>
+                    <p class="text-ink/65 text-sm leading-relaxed">Sealed within 24 hours of milling, and dispatched
+                        the same day your order comes in.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ BY THE NUMBERS ============ -->
+    <section class="bg-green-deep grain-texture py-20">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8">
+            <div class="max-w-2xl mx-auto text-center mb-14 reveal">
+                <span class="text-gold-light font-display font-semibold text-xs uppercase tracking-widest">By the
+                    numbers</span>
+                <h2 class="font-display font-800 text-3xl sm:text-4xl text-white mt-3">What direct sourcing actually
+                    looks like</h2>
+            </div>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 reveal">
+                <div class="stat-card bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+                    <p class="font-display font-900 text-3xl sm:text-4xl text-gold-light">40+</p>
+                    <p class="text-white/70 text-xs mt-2 uppercase tracking-wide">Partner growers &amp; millers</p>
+                </div>
+                <div class="stat-card bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+                    <p class="font-display font-900 text-3xl sm:text-4xl text-gold-light">24hrs</p>
+                    <p class="text-white/70 text-xs mt-2 uppercase tracking-wide">From milling to sealed bag</p>
+                </div>
+                <div class="stat-card bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+                    <p class="font-display font-900 text-3xl sm:text-4xl text-gold-light">100%</p>
+                    <p class="text-white/70 text-xs mt-2 uppercase tracking-wide">Batches hand-checked before ship</p>
+                </div>
+                <div class="stat-card bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+                    <p class="font-display font-900 text-3xl sm:text-4xl text-gold-light">12</p>
+                    <p class="text-white/70 text-xs mt-2 uppercase tracking-wide">Countries we ship to</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="bg-cream py-20">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8">
+            <div class="max-w-2xl mx-auto text-center mb-14 reveal">
+                <span class="text-orange font-display font-semibold text-xs uppercase tracking-widest">From our
+                    kitchens</span>
+                <h2 class="font-display font-800 text-3xl sm:text-4xl text-green-deep mt-3">What the diaspora is
+                    saying</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 reveal">
+                <div class="bg-white rounded-2xl p-7 border border-black/5">
+                    <p class="text-ink/70 text-sm leading-relaxed">"The garri tastes exactly like what my mother
+                        used to make in Abeokuta. First brand abroad that's gotten it right."</p>
+                    <div class="flex items-center gap-3 mt-5">
+                        <div
+                            class="w-10 h-10 rounded-full bg-green-soft flex items-center justify-center font-display font-700 text-green-deep text-sm">
+                            F</div>
+                        <div>
+                            <p class="font-display font-700 text-sm text-ink">Funmilayo A.</p>
+                            <p class="text-ink/50 text-xs">Houston, TX</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-7 border border-black/5">
+                    <p class="text-ink/70 text-sm leading-relaxed">"I've never had a bag arrive short. Every scoop
+                        is exactly what's on the label, order after order."</p>
+                    <div class="flex items-center gap-3 mt-5">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gold-light/60 flex items-center justify-center font-display font-700 text-green-deep text-sm">
+                            T</div>
+                        <div>
+                            <p class="font-display font-700 text-sm text-ink">Tunde O.</p>
+                            <p class="text-ink/50 text-xs">London, UK</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-7 border border-black/5">
+                    <p class="text-ink/70 text-sm leading-relaxed">"The palm oil arrived fresh, not oxidized like
+                        some of the imported stuff I've tried. Worth the wait."</p>
+                    <div class="flex items-center gap-3 mt-5">
+                        <div
+                            class="w-10 h-10 rounded-full bg-orange/20 flex items-center justify-center font-display font-700 text-orange-deep text-sm">
+                            C</div>
+                        <div>
+                            <p class="font-display font-700 text-sm text-ink">Chiamaka N.</p>
+                            <p class="text-ink/50 text-xs">Toronto, CA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="mx-5 sm:mx-8 mb-20 max-w-7xl lg:mx-auto reveal">
+        <div class="bg-green-deep grain-texture rounded-3xl px-8 py-12 sm:px-14 sm:py-14 text-center">
+            <h3 class="font-display font-800 text-white text-2xl sm:text-3xl">Taste the difference for yourself</h3>
+            <p class="text-white/80 mt-2 max-w-md mx-auto">Start with a staple you miss most — garri, lafun, or a
+                bottle of pure palm oil.</p>
+            <a href="Shop.html"
+                class="inline-flex mt-6 bg-orange hover:bg-orange-deep text-white font-display font-semibold px-7 py-3.5 rounded-full transition-colors focus-ring">
+                Shop the harvest
+            </a>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="bg-ink text-white/70 pt-16 pb-8 grain-texture">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
+                        <circle cx="20" cy="20" r="20" fill="#C89B3C" />
+                        <path d="M12 24C12 24 14 14 20 14C26 14 28 24 28 24" stroke="#1B5E20" stroke-width="2.5"
+                            stroke-linecap="round" />
+                    </svg>
+                    <span class="font-display font-800 text-white">Makah Serenity Foods</span>
+                </div>
+                <p class="text-sm leading-relaxed">Nigerian staples, hand-measured and shipped fresh — from our farms to
+                    kitchens everywhere.</p>
+            </div>
+            <div>
+                <h4 class="font-display font-700 text-white mb-4 text-sm uppercase tracking-wide">Quick Links</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="Shop.html" class="hover:text-gold-light transition-colors">Shop</a></li>
+                    <li><a href="About.html" class="hover:text-gold-light transition-colors">About Us</a></li>
+                    <li><a href="Faq.html" class="hover:text-gold-light transition-colors">FAQ</a></li>
+                    <li><a href="Privacy.html" class="hover:text-gold-light transition-colors">Privacy Policy</a></li>
+                    <li><a href="Terms.html" class="hover:text-gold-light transition-colors">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-display font-700 text-white mb-4 text-sm uppercase tracking-wide">Contact</h4>
+                <ul class="space-y-2 text-sm">
+                    <li>hello@makahserenityfoods.com</li>
+                    <li>+234 800 000 0000 (WhatsApp)</li>
+                    <li>Ijebu Ode, Ogun State, Nigeria</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-display font-700 text-white mb-4 text-sm uppercase tracking-wide">Follow</h4>
+                <div class="flex gap-3">
+                    <a href="#" aria-label="Instagram"
+                        class="w-9 h-9 rounded-full bg-white/10 hover:bg-orange flex items-center justify-center transition-colors focus-ring">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="WhatsApp"
+                        class="w-9 h-9 rounded-full bg-white/10 hover:bg-orange flex items-center justify-center transition-colors focus-ring">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20l1.1-5.4A8.5 8.5 0 1 1 21 11.5Z" />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Facebook"
+                        class="w-9 h-9 rounded-full bg-white/10 hover:bg-orange flex items-center justify-center transition-colors focus-ring">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3Z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div
+            class="max-w-7xl mx-auto px-5 sm:px-8 mt-12 pt-6 border-t border-white/10 text-xs text-white/40 flex flex-col sm:flex-row justify-between gap-2">
+            <p>© 2026 Makah Serenity Foods. All rights reserved.</p>
+            <p>Built with care for Nigerian kitchens everywhere.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+        // Scroll-reveal for the new sections. Safe no-op if IntersectionObserver is unsupported.
+        if ('IntersectionObserver' in window) {
+            const revealEls = document.querySelectorAll('.reveal');
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            revealEls.forEach((el) => io.observe(el));
+        } else {
+            document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+        }
+    </script>
+</body>
+
+</html>
