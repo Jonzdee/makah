@@ -10,7 +10,7 @@
     // TODO(store owner): replace with your real WhatsApp business number,
     // digits only, in international format (country code + number, no + or leading 0s).
     // e.g. Nigerian number 0803 123 4567 -> "2348031234567"
-    const WHATSAPP_NUMBER = "2348000000000";
+    const WHATSAPP_NUMBER = "2348067343601";
 
     /* ---------------- Product catalog ---------------- */
     const PRODUCTS = [
